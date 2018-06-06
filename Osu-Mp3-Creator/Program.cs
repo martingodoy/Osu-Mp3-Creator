@@ -16,7 +16,7 @@ namespace Osu_Mp3_Creator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new mainWindow());
         }
     }
 }
