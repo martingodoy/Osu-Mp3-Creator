@@ -29,97 +29,84 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
-            this.defaultListView = new System.Windows.Forms.ListView();
-            this.buttonGenerate = new System.Windows.Forms.Button();
-            this.modifiedListView = new System.Windows.Forms.ListView();
-            this.buttonSelect = new System.Windows.Forms.Button();
-            this.buttonDeselect = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.Confirmar = new System.Windows.Forms.Button();
+            this.textBoxBefore = new System.Windows.Forms.TextBox();
+            this.Examinar1 = new System.Windows.Forms.Button();
+            this.Examinar2 = new System.Windows.Forms.Button();
+            this.textBoxAfter = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // defaultListView
+            // Confirmar
             // 
-            this.defaultListView.Location = new System.Drawing.Point(12, 12);
-            this.defaultListView.Name = "defaultListView";
-            this.defaultListView.Size = new System.Drawing.Size(318, 445);
-            this.defaultListView.TabIndex = 1;
-            this.defaultListView.UseCompatibleStateImageBehavior = false;
-            this.defaultListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Confirmar.Location = new System.Drawing.Point(438, 12);
+            this.Confirmar.Name = "Confirmar";
+            this.Confirmar.Size = new System.Drawing.Size(172, 48);
+            this.Confirmar.TabIndex = 0;
+            this.Confirmar.Text = "Confirmar";
+            this.Confirmar.UseVisualStyleBackColor = true;
+            this.Confirmar.Click += new System.EventHandler(this.Confirmar_Click);
             // 
-            // buttonGenerate
+            // textBoxBefore
             // 
-            this.buttonGenerate.Location = new System.Drawing.Point(348, 423);
-            this.buttonGenerate.Name = "buttonGenerate";
-            this.buttonGenerate.Size = new System.Drawing.Size(112, 34);
-            this.buttonGenerate.TabIndex = 2;
-            this.buttonGenerate.Text = "Generate Mp3 Files";
-            this.buttonGenerate.UseVisualStyleBackColor = true;
-            this.buttonGenerate.Click += new System.EventHandler(this.button1_Click);
+            this.textBoxBefore.Location = new System.Drawing.Point(12, 26);
+            this.textBoxBefore.Name = "textBoxBefore";
+            this.textBoxBefore.ReadOnly = true;
+            this.textBoxBefore.Size = new System.Drawing.Size(331, 20);
+            this.textBoxBefore.TabIndex = 1;
             // 
-            // modifiedListView
+            // Examinar1
             // 
-            this.modifiedListView.Location = new System.Drawing.Point(478, 12);
-            this.modifiedListView.Name = "modifiedListView";
-            this.modifiedListView.Size = new System.Drawing.Size(318, 445);
-            this.modifiedListView.TabIndex = 3;
-            this.modifiedListView.UseCompatibleStateImageBehavior = false;
-            this.modifiedListView.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
+            this.Examinar1.Location = new System.Drawing.Point(358, 27);
+            this.Examinar1.Name = "Examinar1";
+            this.Examinar1.Size = new System.Drawing.Size(66, 19);
+            this.Examinar1.TabIndex = 2;
+            this.Examinar1.Text = "Examine";
+            this.Examinar1.UseVisualStyleBackColor = true;
+            this.Examinar1.Click += new System.EventHandler(this.Examinar1_Click);
             // 
-            // buttonSelect
+            // Examinar2
             // 
-            this.buttonSelect.Location = new System.Drawing.Point(348, 182);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(112, 34);
-            this.buttonSelect.TabIndex = 4;
-            this.buttonSelect.Text = "Mark as selected";
-            this.buttonSelect.UseVisualStyleBackColor = true;
-            this.buttonSelect.Click += new System.EventHandler(this.button2_Click);
+            this.Examinar2.Location = new System.Drawing.Point(973, 26);
+            this.Examinar2.Name = "Examinar2";
+            this.Examinar2.Size = new System.Drawing.Size(66, 19);
+            this.Examinar2.TabIndex = 4;
+            this.Examinar2.Text = "Examinar";
+            this.Examinar2.UseVisualStyleBackColor = true;
+            this.Examinar2.Click += new System.EventHandler(this.Examinar2_Click);
             // 
-            // buttonDeselect
+            // textBoxAfter
             // 
-            this.buttonDeselect.Location = new System.Drawing.Point(348, 222);
-            this.buttonDeselect.Name = "buttonDeselect";
-            this.buttonDeselect.Size = new System.Drawing.Size(112, 34);
-            this.buttonDeselect.TabIndex = 5;
-            this.buttonDeselect.Text = "Mark as deselected";
-            this.buttonDeselect.UseVisualStyleBackColor = true;
-            this.buttonDeselect.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(348, 12);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(112, 34);
-            this.buttonCancel.TabIndex = 6;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.textBoxAfter.Location = new System.Drawing.Point(626, 27);
+            this.textBoxAfter.Name = "textBoxAfter";
+            this.textBoxAfter.ReadOnly = true;
+            this.textBoxAfter.Size = new System.Drawing.Size(331, 20);
+            this.textBoxAfter.TabIndex = 3;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 469);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonDeselect);
-            this.Controls.Add(this.buttonSelect);
-            this.Controls.Add(this.modifiedListView);
-            this.Controls.Add(this.buttonGenerate);
-            this.Controls.Add(this.defaultListView);
+            this.ClientSize = new System.Drawing.Size(1052, 72);
+            this.Controls.Add(this.Examinar2);
+            this.Controls.Add(this.textBoxAfter);
+            this.Controls.Add(this.Examinar1);
+            this.Controls.Add(this.textBoxBefore);
+            this.Controls.Add(this.Confirmar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainWindow";
             this.Text = "Osu! Mp3 Creator";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView defaultListView;
-        private System.Windows.Forms.Button buttonGenerate;
-        private System.Windows.Forms.ListView modifiedListView;
-        private System.Windows.Forms.Button buttonSelect;
-        private System.Windows.Forms.Button buttonDeselect;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button Confirmar;
+        private System.Windows.Forms.TextBox textBoxBefore;
+        private System.Windows.Forms.Button Examinar1;
+        private System.Windows.Forms.Button Examinar2;
+        private System.Windows.Forms.TextBox textBoxAfter;
     }
 }
 
