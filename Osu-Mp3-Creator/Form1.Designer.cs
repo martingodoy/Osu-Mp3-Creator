@@ -34,6 +34,7 @@
             this.Examinar1 = new System.Windows.Forms.Button();
             this.Examinar2 = new System.Windows.Forms.Button();
             this.textBoxAfter = new System.Windows.Forms.TextBox();
+            this.buttonDebug = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Confirmar
@@ -42,7 +43,7 @@
             this.Confirmar.Name = "Confirmar";
             this.Confirmar.Size = new System.Drawing.Size(172, 48);
             this.Confirmar.TabIndex = 0;
-            this.Confirmar.Text = "Confirmar";
+            this.Confirmar.Text = "Create Mp3\'s";
             this.Confirmar.UseVisualStyleBackColor = true;
             this.Confirmar.Click += new System.EventHandler(this.Confirmar_Click);
             // 
@@ -70,7 +71,7 @@
             this.Examinar2.Name = "Examinar2";
             this.Examinar2.Size = new System.Drawing.Size(66, 19);
             this.Examinar2.TabIndex = 4;
-            this.Examinar2.Text = "Examinar";
+            this.Examinar2.Text = "Examine";
             this.Examinar2.UseVisualStyleBackColor = true;
             this.Examinar2.Click += new System.EventHandler(this.Examinar2_Click);
             // 
@@ -82,11 +83,22 @@
             this.textBoxAfter.Size = new System.Drawing.Size(331, 20);
             this.textBoxAfter.TabIndex = 3;
             // 
+            // buttonDebug
+            // 
+            this.buttonDebug.Location = new System.Drawing.Point(494, 220);
+            this.buttonDebug.Name = "buttonDebug";
+            this.buttonDebug.Size = new System.Drawing.Size(406, 186);
+            this.buttonDebug.TabIndex = 6;
+            this.buttonDebug.Text = "DEBUG";
+            this.buttonDebug.UseVisualStyleBackColor = true;
+            this.buttonDebug.Click += new System.EventHandler(this.buttonDebug_Click);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 72);
+            this.ClientSize = new System.Drawing.Size(1052, 550);
+            this.Controls.Add(this.buttonDebug);
             this.Controls.Add(this.Examinar2);
             this.Controls.Add(this.textBoxAfter);
             this.Controls.Add(this.Examinar1);
@@ -107,6 +119,7 @@
         private System.Windows.Forms.Button Examinar1;
         private System.Windows.Forms.Button Examinar2;
         private System.Windows.Forms.TextBox textBoxAfter;
+        private System.Windows.Forms.Button buttonDebug;
     }
 }
 
