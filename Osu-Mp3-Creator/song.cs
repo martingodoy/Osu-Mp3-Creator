@@ -21,7 +21,7 @@ namespace Osu_Mp3_Creator
         {
             FolderPath = folderpath;
             FolderName = foldername;
-            ImagePath = ImagePath;
+            ImagePath = imagepath;
             Mp3Path = mp3path;
             Mp3Name = mp3name;
             DiffPath = diffpath;

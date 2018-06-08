@@ -37,11 +37,13 @@
             this.buttonDebug = new System.Windows.Forms.Button();
             this.listViewFull = new System.Windows.Forms.ListView();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeaderPortrait = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // Confirmar
             // 
-            this.Confirmar.Location = new System.Drawing.Point(438, 273);
+            this.Confirmar.Location = new System.Drawing.Point(438, 256);
             this.Confirmar.Name = "Confirmar";
             this.Confirmar.Size = new System.Drawing.Size(172, 48);
             this.Confirmar.TabIndex = 0;
@@ -75,7 +77,7 @@
             this.Browse2.TabIndex = 4;
             this.Browse2.Text = "Browse...";
             this.Browse2.UseVisualStyleBackColor = true;
-            this.Browse2.Click += new System.EventHandler(this.Examinar2_Click);
+            this.Browse2.Click += new System.EventHandler(this.Browse2_Click);
             // 
             // textBoxAfter
             // 
@@ -87,7 +89,7 @@
             // 
             // buttonDebug
             // 
-            this.buttonDebug.Location = new System.Drawing.Point(500, 327);
+            this.buttonDebug.Location = new System.Drawing.Point(496, 310);
             this.buttonDebug.Name = "buttonDebug";
             this.buttonDebug.Size = new System.Drawing.Size(54, 21);
             this.buttonDebug.TabIndex = 6;
@@ -97,11 +99,17 @@
             // 
             // listViewFull
             // 
+            this.listViewFull.BackColor = System.Drawing.SystemColors.Window;
+            this.listViewFull.CheckBoxes = true;
+            this.listViewFull.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderPortrait,
+            this.columnHeaderName});
             this.listViewFull.Location = new System.Drawing.Point(12, 52);
             this.listViewFull.Name = "listViewFull";
             this.listViewFull.Size = new System.Drawing.Size(420, 486);
             this.listViewFull.TabIndex = 7;
             this.listViewFull.UseCompatibleStateImageBehavior = false;
+            this.listViewFull.View = System.Windows.Forms.View.Details;
             // 
             // listView1
             // 
@@ -110,6 +118,16 @@
             this.listView1.Size = new System.Drawing.Size(424, 486);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnHeaderPortrait
+            // 
+            this.columnHeaderPortrait.Text = "Portrait";
+            this.columnHeaderPortrait.Width = 100;
+            // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.Text = "Name";
+            this.columnHeaderName.Width = 500;
             // 
             // mainWindow
             // 
@@ -142,6 +160,8 @@
         private System.Windows.Forms.Button buttonDebug;
         private System.Windows.Forms.ListView listViewFull;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeaderPortrait;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
     }
 }
 

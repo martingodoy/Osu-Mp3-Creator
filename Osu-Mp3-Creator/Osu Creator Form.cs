@@ -28,7 +28,7 @@ namespace Osu_Mp3_Creator
         }
 
         //Window triggers
-        private void Examinar1_Click(object sender, EventArgs e)
+        private void Browse1_Click(object sender, EventArgs e)
         {
             sourcePath = seekFolder();
             textBoxBefore.Text = sourcePath;
@@ -37,7 +37,7 @@ namespace Osu_Mp3_Creator
                 songClassConstructor();
             }
         }
-        private void Examinar2_Click(object sender, EventArgs e)
+        private void Browse2_Click(object sender, EventArgs e)
         {
             targetPath = seekFolder();
             textBoxAfter.Text = targetPath;
@@ -54,6 +54,8 @@ namespace Osu_Mp3_Creator
         //functions
         private void songClassConstructor()
         {
+            int objectamount = 0;
+
             //for each folder song in \Songs
             foreach (string subfolder in Directory.GetDirectories(sourcePath))
             {
@@ -157,31 +159,44 @@ namespace Osu_Mp3_Creator
                     if (mp3name != "")
                     {
                         //construct the object
-                        Song song = new Song(folderpath, foldername, imagepath, mp3path, mp3name, diffpath, title, artist);
+                        song = new Song(folderpath, foldername, imagepath, mp3path, mp3name, diffpath, title, artist);
+                        objectamount++;
                     }
                 }
             }
+
+            List<Song> songs = new List<Song>();
+
+            foreach (Song song in songs)
+            {
+                Console.WriteLine(song);
+            }
+
             printSubFolders();
         }   //
         private void printSubFolders()
         {
             //where the objets fron class song are drawn into the window
+            //modifyMp3();
         }   //
         private void modifyMp3()
         {
-            //Copy the mp3
-            System.IO.File.Copy("", targetPath, true);
+            //foreach (string index in )
+            //{
+                //Copy the mp3
+                System.IO.File.Copy("", targetPath, true);
 
-            //Create Song Object
-            var file = TagLib.File.Create("");
+                //Create Song Object
+                var file = TagLib.File.Create("");
 
-            //Applying the modifications
-            file.Tag.Title = "";                                        //title
-            file.Tag.AlbumArtists = "".Split(new char[] { ';' });       //Artist
-            file.Tag.Album = "osu!";                                    //album
+                //Applying the modifications
+                file.Tag.Title = "";                                        //title
+                file.Tag.AlbumArtists = "".Split(new char[] { ';' });       //Artist
+                file.Tag.Album = "osu!";                                    //album
 
-            //Save the mp3
-            file.Save();
+                //Save the mp3
+                file.Save();
+           // }
         }   //
         
         //Window functionalities
@@ -208,11 +223,6 @@ namespace Osu_Mp3_Creator
             /*sourcePath = @"C:\...\osu!\Songs";
             targetPath = @"C:\...\Mp3output";
             songClassConstructor();*/
-        }
-
-        private void Browse1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

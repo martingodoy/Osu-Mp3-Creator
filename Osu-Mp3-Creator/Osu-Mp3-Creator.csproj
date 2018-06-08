@@ -51,7 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class Song.cs" />
+    <Compile Include="song.cs" />
     <Compile Include="Osu Creator Form.cs">
       <SubType>Form</SubType>
     </Compile>
