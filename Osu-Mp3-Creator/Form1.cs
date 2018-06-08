@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -30,21 +31,48 @@ namespace Osu_Mp3_Creator
         {
             foreach (string subfolder in Directory.GetDirectories(sourcePath))
             {
-                //Console.WriteLine(subfolder);
+                //// Set foldername, folderpath ////
+                string[] spstring = subfolder.Split(new string[] { "\\Songs\\" }, StringSplitOptions.None);
 
-                //split subfolder into folder name and full path
+                string foldername = spstring[1];
+                string folderpath = subfolder;
 
+                //// Set diffpath ////
+                bool noosufile = false;
+                string diffpath = "";
+                string patosu = @".*\.osu";
+                List<string> osufiles = new List<string>();
+                foreach (string file in Directory.GetFiles(subfolder))
+                {
+                    string[] spfile = file.Split(new string[] { foldername + "\\" }, StringSplitOptions.None);
+                    string text = spfile[1];
 
+                    //// filter .osu ////
+                    Regex r1 = new Regex(patosu, RegexOptions.IgnoreCase);
+                    Match m1 = r1.Match(text);
+                    if (m1.Success)
+                    {
+                        osufiles.Add(file);
+                    }
+                }
 
+                if (osufiles.Count > 0)
+                {
+                    diffpath = osufiles[0];
+                }
+                else noosufile = true;
 
+                //// Set mp3path, mp3name, artist, title ////
+                bool nomp3file = false;
 
+                string[] lines = System.IO.File.ReadAllLines(diffpath);
+                foreach (string line in lines)
+                    Console.WriteLine(line);
 
-
-
-
-
-
-                Song song = new Song();
+                if (noosufile == false || nomp3file == false)
+                {
+                    //Song song = new Song();
+                }
             }
             printSubFolders();
         }
@@ -63,9 +91,9 @@ namespace Osu_Mp3_Creator
             var file = TagLib.File.Create("");
 
             //Applying the modifications
-            file.Tag.Title = "";                                         //title
+            file.Tag.Title = "";                                        //title
             file.Tag.AlbumArtists = "".Split(new char[] { ';' });       //Artist
-            file.Tag.Album = "osu!";                                        //album
+            file.Tag.Album = "osu!";                                    //album
 
             //Save the mp3
             file.Save();
@@ -119,10 +147,12 @@ namespace Osu_Mp3_Creator
                 }
             }
 
-        //Not in use
+        //Debugging
         private void buttonDebug_Click(object sender, EventArgs e)
         {
-
+            sourcePath = "C:\\Users\\Larcho\\Documents\\osu!\\Songs";
+            targetPath = "C:\\Users\\Larcho\\Desktop\\Test";
+            songClassConstructor();
         }
     }
 }
