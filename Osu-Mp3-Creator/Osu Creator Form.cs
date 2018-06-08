@@ -31,43 +31,102 @@ namespace Osu_Mp3_Creator
         {
             foreach (string subfolder in Directory.GetDirectories(sourcePath))
             {
+                string osuparam = @".*\.osu";
+                string mp3nameparam = @".*\.osu";
+                string titleparam = @"AudioFilename\: (.*)\.mp3$";
+                string artistparam = @".*\.osu";
+                string imageparam = @".*\.osu";
+
+                string diffpath = "";
+                string foldername = "";
+                string folderpath = "";
+
+                bool noosufile = false;
+                bool nomp3file = false;
+                bool noimagefile = false;
+                bool exitwhile = false;
+
                 //// Set foldername, folderpath ////
                 string[] spstring = subfolder.Split(new string[] { "\\Songs\\" }, StringSplitOptions.None);
-
-                string foldername = spstring[1];
-                string folderpath = subfolder;
+                foldername = spstring[1];
+                folderpath = subfolder;
 
                 //// Set diffpath ////
-                bool noosufile = false;
-                string diffpath = "";
-                string patosu = @".*\.osu";
                 List<string> osufiles = new List<string>();
+                string text = "";
+
                 foreach (string file in Directory.GetFiles(subfolder))
                 {
                     string[] spfile = file.Split(new string[] { foldername + "\\" }, StringSplitOptions.None);
-                    string text = spfile[1];
+                    text = spfile[1];
 
-                    //// filter .osu ////
-                    Regex r1 = new Regex(patosu, RegexOptions.IgnoreCase);
+                    // filter files that end with ".osu" //
+                    Regex r1 = new Regex(osuparam, RegexOptions.IgnoreCase);
                     Match m1 = r1.Match(text);
                     if (m1.Success)
                     {
                         osufiles.Add(file);
                     }
-                }
-
-                if (osufiles.Count > 0)
+                }//creates a list with the .osu files within the songs path
+                if (osufiles.Count() > 0)
                 {
                     diffpath = osufiles[0];
                 }
-                else noosufile = true;
 
-                //// Set mp3path, mp3name, artist, title ////
-                bool nomp3file = false;
+                if (diffpath != "")
+                {
+                    //// Set mp3path, mp3name, artist, title ////
+                    string[] lines = System.IO.File.ReadAllLines(diffpath);
 
-                string[] lines = System.IO.File.ReadAllLines(diffpath);
-                foreach (string line in lines)
-                    Console.WriteLine(line);
+                    int lineNumber = 0;
+                    while (!exitwhile)
+                    {
+                        string text1 = lines[lineNumber];
+
+                        // title //
+                        Regex r1 = new Regex(titleparam, RegexOptions.IgnoreCase);
+                        Match m1 = r1.Match(text1);
+                        if (m1.Success)
+                        {
+                            string mp3name = m1.Groups[1].Value;
+                            Console.WriteLine(mp3name);
+                        }
+
+                        /*
+                        // artist //
+                        Regex r2 = new Regex(titleparam, RegexOptions.IgnoreCase);
+                        Match m2 = r2.Match(text1);
+                        if (m2.Success)
+                        {
+
+                        }
+
+                        // mp3name //
+                        Regex r3 = new Regex(titleparam, RegexOptions.IgnoreCase);
+                        Match m3 = r3.Match(text1);
+                        if (m3.Success)
+                        {
+
+                        }
+
+                        // image //
+                        Regex r4 = new Regex(titleparam, RegexOptions.IgnoreCase);
+                        Match m4 = r4.Match(text1);
+                        if (m4.Success)
+                        {
+
+                        }*/
+
+                        // exit loop//
+                        if (text1 == "[TimingPoints]")
+                        {
+                            exitwhile = true;
+                        }
+
+
+                        lineNumber++;
+                    }
+                }
 
                 if (noosufile == false || nomp3file == false)
                 {
