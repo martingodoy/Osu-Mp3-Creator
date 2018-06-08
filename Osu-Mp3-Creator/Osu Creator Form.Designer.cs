@@ -31,15 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
             this.Confirmar = new System.Windows.Forms.Button();
             this.textBoxBefore = new System.Windows.Forms.TextBox();
-            this.Examinar1 = new System.Windows.Forms.Button();
-            this.Examinar2 = new System.Windows.Forms.Button();
+            this.Browse1 = new System.Windows.Forms.Button();
+            this.Browse2 = new System.Windows.Forms.Button();
             this.textBoxAfter = new System.Windows.Forms.TextBox();
             this.buttonDebug = new System.Windows.Forms.Button();
+            this.listViewFull = new System.Windows.Forms.ListView();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // Confirmar
             // 
-            this.Confirmar.Location = new System.Drawing.Point(438, 12);
+            this.Confirmar.Location = new System.Drawing.Point(438, 273);
             this.Confirmar.Name = "Confirmar";
             this.Confirmar.Size = new System.Drawing.Size(172, 48);
             this.Confirmar.TabIndex = 0;
@@ -52,56 +54,74 @@
             this.textBoxBefore.Location = new System.Drawing.Point(12, 26);
             this.textBoxBefore.Name = "textBoxBefore";
             this.textBoxBefore.ReadOnly = true;
-            this.textBoxBefore.Size = new System.Drawing.Size(331, 20);
+            this.textBoxBefore.Size = new System.Drawing.Size(348, 20);
             this.textBoxBefore.TabIndex = 1;
             // 
-            // Examinar1
+            // Browse1
             // 
-            this.Examinar1.Location = new System.Drawing.Point(358, 27);
-            this.Examinar1.Name = "Examinar1";
-            this.Examinar1.Size = new System.Drawing.Size(66, 19);
-            this.Examinar1.TabIndex = 2;
-            this.Examinar1.Text = "Examine";
-            this.Examinar1.UseVisualStyleBackColor = true;
-            this.Examinar1.Click += new System.EventHandler(this.Examinar1_Click);
+            this.Browse1.Location = new System.Drawing.Point(366, 27);
+            this.Browse1.Name = "Browse1";
+            this.Browse1.Size = new System.Drawing.Size(66, 19);
+            this.Browse1.TabIndex = 2;
+            this.Browse1.Text = "Browse...";
+            this.Browse1.UseVisualStyleBackColor = true;
+            this.Browse1.Click += new System.EventHandler(this.Browse1_Click);
             // 
-            // Examinar2
+            // Browse2
             // 
-            this.Examinar2.Location = new System.Drawing.Point(973, 26);
-            this.Examinar2.Name = "Examinar2";
-            this.Examinar2.Size = new System.Drawing.Size(66, 19);
-            this.Examinar2.TabIndex = 4;
-            this.Examinar2.Text = "Examine";
-            this.Examinar2.UseVisualStyleBackColor = true;
-            this.Examinar2.Click += new System.EventHandler(this.Examinar2_Click);
+            this.Browse2.Location = new System.Drawing.Point(974, 26);
+            this.Browse2.Name = "Browse2";
+            this.Browse2.Size = new System.Drawing.Size(66, 19);
+            this.Browse2.TabIndex = 4;
+            this.Browse2.Text = "Browse...";
+            this.Browse2.UseVisualStyleBackColor = true;
+            this.Browse2.Click += new System.EventHandler(this.Examinar2_Click);
             // 
             // textBoxAfter
             // 
-            this.textBoxAfter.Location = new System.Drawing.Point(626, 27);
+            this.textBoxAfter.Location = new System.Drawing.Point(616, 26);
             this.textBoxAfter.Name = "textBoxAfter";
             this.textBoxAfter.ReadOnly = true;
-            this.textBoxAfter.Size = new System.Drawing.Size(331, 20);
+            this.textBoxAfter.Size = new System.Drawing.Size(352, 20);
             this.textBoxAfter.TabIndex = 3;
             // 
             // buttonDebug
             // 
-            this.buttonDebug.Location = new System.Drawing.Point(494, 220);
+            this.buttonDebug.Location = new System.Drawing.Point(500, 327);
             this.buttonDebug.Name = "buttonDebug";
-            this.buttonDebug.Size = new System.Drawing.Size(406, 186);
+            this.buttonDebug.Size = new System.Drawing.Size(54, 21);
             this.buttonDebug.TabIndex = 6;
             this.buttonDebug.Text = "DEBUG";
             this.buttonDebug.UseVisualStyleBackColor = true;
             this.buttonDebug.Click += new System.EventHandler(this.buttonDebug_Click);
+            // 
+            // listViewFull
+            // 
+            this.listViewFull.Location = new System.Drawing.Point(12, 52);
+            this.listViewFull.Name = "listViewFull";
+            this.listViewFull.Size = new System.Drawing.Size(420, 486);
+            this.listViewFull.TabIndex = 7;
+            this.listViewFull.UseCompatibleStateImageBehavior = false;
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(616, 52);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(424, 486);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 550);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listViewFull);
             this.Controls.Add(this.buttonDebug);
-            this.Controls.Add(this.Examinar2);
+            this.Controls.Add(this.Browse2);
             this.Controls.Add(this.textBoxAfter);
-            this.Controls.Add(this.Examinar1);
+            this.Controls.Add(this.Browse1);
             this.Controls.Add(this.textBoxBefore);
             this.Controls.Add(this.Confirmar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -116,10 +136,12 @@
 
         private System.Windows.Forms.Button Confirmar;
         private System.Windows.Forms.TextBox textBoxBefore;
-        private System.Windows.Forms.Button Examinar1;
-        private System.Windows.Forms.Button Examinar2;
+        private System.Windows.Forms.Button Browse1;
+        private System.Windows.Forms.Button Browse2;
         private System.Windows.Forms.TextBox textBoxAfter;
         private System.Windows.Forms.Button buttonDebug;
+        private System.Windows.Forms.ListView listViewFull;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

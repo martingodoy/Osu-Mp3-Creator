@@ -17,145 +17,14 @@ namespace Osu_Mp3_Creator
 {
     public partial class mainWindow : Form
     {
-        String targetPath = "";
-        String sourcePath = "";
+        string targetPath = "";
+        string sourcePath = "";
 
         public mainWindow()
         {
             InitializeComponent();
-            textBoxBefore.Text = "Osu Songs folder";
-            textBoxAfter.Text = "Folder in wich your mp3's go";
-        }
-
-        private void songClassConstructor()
-        {
-            foreach (string subfolder in Directory.GetDirectories(sourcePath))
-            {
-                string osuparam = @".*\.osu";
-                string mp3nameparam = @".*\.osu";
-                string titleparam = @"AudioFilename\: (.*)\.mp3$";
-                string artistparam = @".*\.osu";
-                string imageparam = @".*\.osu";
-
-                string diffpath = "";
-                string foldername = "";
-                string folderpath = "";
-
-                bool noosufile = false;
-                bool nomp3file = false;
-                bool noimagefile = false;
-                bool exitwhile = false;
-
-                //// Set foldername, folderpath ////
-                string[] spstring = subfolder.Split(new string[] { "\\Songs\\" }, StringSplitOptions.None);
-                foldername = spstring[1];
-                folderpath = subfolder;
-
-                //// Set diffpath ////
-                List<string> osufiles = new List<string>();
-                string text = "";
-
-                foreach (string file in Directory.GetFiles(subfolder))
-                {
-                    string[] spfile = file.Split(new string[] { foldername + "\\" }, StringSplitOptions.None);
-                    text = spfile[1];
-
-                    // filter files that end with ".osu" //
-                    Regex r1 = new Regex(osuparam, RegexOptions.IgnoreCase);
-                    Match m1 = r1.Match(text);
-                    if (m1.Success)
-                    {
-                        osufiles.Add(file);
-                    }
-                }//creates a list with the .osu files within the songs path
-                if (osufiles.Count() > 0)
-                {
-                    diffpath = osufiles[0];
-                }
-
-                if (diffpath != "")
-                {
-                    //// Set mp3path, mp3name, artist, title ////
-                    string[] lines = System.IO.File.ReadAllLines(diffpath);
-
-                    int lineNumber = 0;
-                    while (!exitwhile)
-                    {
-                        string text1 = lines[lineNumber];
-
-                        // title //
-                        Regex r1 = new Regex(titleparam, RegexOptions.IgnoreCase);
-                        Match m1 = r1.Match(text1);
-                        if (m1.Success)
-                        {
-                            string mp3name = m1.Groups[1].Value;
-                            Console.WriteLine(mp3name);
-                        }
-
-                        /*
-                        // artist //
-                        Regex r2 = new Regex(titleparam, RegexOptions.IgnoreCase);
-                        Match m2 = r2.Match(text1);
-                        if (m2.Success)
-                        {
-
-                        }
-
-                        // mp3name //
-                        Regex r3 = new Regex(titleparam, RegexOptions.IgnoreCase);
-                        Match m3 = r3.Match(text1);
-                        if (m3.Success)
-                        {
-
-                        }
-
-                        // image //
-                        Regex r4 = new Regex(titleparam, RegexOptions.IgnoreCase);
-                        Match m4 = r4.Match(text1);
-                        if (m4.Success)
-                        {
-
-                        }*/
-
-                        // exit loop//
-                        if (text1 == "[TimingPoints]")
-                        {
-                            exitwhile = true;
-                        }
-
-
-                        lineNumber++;
-                    }
-                }
-
-                if (noosufile == false || nomp3file == false)
-                {
-                    //Song song = new Song();
-                }
-            }
-            printSubFolders();
-        }
-
-        private void printSubFolders()
-        {
-            //where the objets fron class song are drawn into the window
-        }
-
-        private void modifyMp3()
-        {
-            //Copy the mp3
-            System.IO.File.Copy("", targetPath, true);
-
-            //Create Song Object
-            var file = TagLib.File.Create("");
-
-            //Applying the modifications
-            file.Tag.Title = "";                                        //title
-            file.Tag.AlbumArtists = "".Split(new char[] { ';' });       //Artist
-            file.Tag.Album = "osu!";                                    //album
-
-            //Save the mp3
-            file.Save();
+            textBoxBefore.Text = @"C:\...\osu!\Songs";
+            textBoxAfter.Text = @"C:\...\Mp3output";
         }
 
         //Window triggers
@@ -182,36 +51,168 @@ namespace Osu_Mp3_Creator
             modifyMp3();
         }
 
+        //functions
+        private void songClassConstructor()
+        {
+            //for each folder song in \Songs
+            foreach (string subfolder in Directory.GetDirectories(sourcePath))
+            {
+                string osuparam = @".*\.osu";
+                string mp3nameparam = @"AudioFilename\: (.*)";
+                string titleparam = @"Title\:(.*)";
+                string artistparam = @"Artist\:(.*)";
+                string imageparam = @"([0,9]+\,[0,9]+)\,\""([^\""]+)\"".*";
+
+                string diffpath = "";
+                string foldername = "";
+                string folderpath = "";
+                string mp3name = "";
+                string mp3path = "";
+                string imagepath = "";
+                string title = "";
+                string artist = "";
+
+                bool exitwhile = false;
+
+                // foldername, folderpath ///
+                string[] spstring = subfolder.Split(new string[] { "\\Songs\\" }, StringSplitOptions.None);
+                foldername = spstring[1];   //foldername
+                folderpath = subfolder;    //folderpath
+
+                // diffpath //
+                List<string> osufiles = new List<string>();
+                string text = "";
+                foreach (string file in Directory.GetFiles(subfolder))
+                {
+                    string[] spfile = file.Split(new string[] { foldername + "\\" }, StringSplitOptions.None);
+                    text = spfile[1];
+
+                    // filter files that end with ".osu" //
+                    Regex r1 = new Regex(osuparam, RegexOptions.IgnoreCase);
+                    Match m1 = r1.Match(text);
+                    if (m1.Success)
+                    {
+                        osufiles.Add(file);
+                    }
+                }   //creates a list with the .osu files within the songs path
+                if (osufiles.Count() > 0)
+                {
+                    diffpath = osufiles[0];
+                }   //choses the 1st .osu file it encountered and sets it as diffpath
+
+                // if C:\...\map.osu exists then
+                if (diffpath != "")
+                {
+                    //  mp3name, mp3path, title, artist, imagepath //
+                    int lineNumber = 0;
+                    string[] lines = System.IO.File.ReadAllLines(diffpath); //takes .osu file and transform into an array of strings
+                    while (!exitwhile)
+                    {
+                        string text1 = lines[lineNumber];
+
+                        // mp3name, mp3path //
+                        Regex r1 = new Regex(mp3nameparam, RegexOptions.IgnoreCase);
+                        Match m1 = r1.Match(text1);
+                        if (m1.Success)
+                        {
+                            mp3name = m1.Groups[1].Value;   //mp3name
+                            mp3path = subfolder + "\\" + mp3name;   //mp3path
+                        }
+
+                        // title //
+                        Regex r2 = new Regex(titleparam, RegexOptions.IgnoreCase);
+                        Match m2 = r2.Match(text1);
+                        if (m2.Success)
+                        {
+                            title = m2.Groups[1].Value; //title
+                        }
+
+                        // artist //
+                        Regex r3 = new Regex(artistparam, RegexOptions.IgnoreCase);
+                        Match m3 = r3.Match(text1);
+                        if (m3.Success)
+                        {
+                            artist = m3.Groups[1].Value;    //artist
+                        }
+
+                        // image //
+                        Regex r4 = new Regex(imageparam, RegexOptions.IgnoreCase);
+                        Match m4 = r4.Match(text1);
+                        if (m4.Success)
+                        {
+                            string imagename = m4.Groups[2].Value;
+                            imagepath = subfolder + "\\" + imagename;   //imagepath
+                        }
+
+                        // exit loop //
+                        if (text1 == "[TimingPoints]")
+                        {
+                            exitwhile = true;
+                        }
+
+                        lineNumber++;
+                    } //filters out the variables using regex on each line
+
+                    // skips songs that dont contain an .mp3 file //
+                    if (mp3name != "")
+                    {
+                        //construct the object
+                        Song song = new Song(folderpath, foldername, imagepath, mp3path, mp3name, diffpath, title, artist);
+                    }
+                }
+            }
+            printSubFolders();
+        }   //
+        private void printSubFolders()
+        {
+            //where the objets fron class song are drawn into the window
+        }   //
+        private void modifyMp3()
+        {
+            //Copy the mp3
+            System.IO.File.Copy("", targetPath, true);
+
+            //Create Song Object
+            var file = TagLib.File.Create("");
+
+            //Applying the modifications
+            file.Tag.Title = "";                                        //title
+            file.Tag.AlbumArtists = "".Split(new char[] { ';' });       //Artist
+            file.Tag.Album = "osu!";                                    //album
+
+            //Save the mp3
+            file.Save();
+        }   //
+        
         //Window functionalities
-        private String seekFolder()
+        private string seekFolder()
         {
             FolderBrowserDialog search = new FolderBrowserDialog();
             if (search.ShowDialog() == DialogResult.OK)
             {
-                String outputVar = search.SelectedPath;
+                string outputVar = search.SelectedPath;
                 return outputVar;
             } else { return ""; }
-        }
-        private String seekFile()
-            {
-                OpenFileDialog search = new OpenFileDialog();
-                if (search.ShowDialog() == DialogResult.OK)
-                {
-                    String outputVar = search.FileName;
-                    return outputVar;
-                }
-                else
-                {
-                    return "";
-                }
-            }
+        }   //Browse... function for folder
 
-        //Debugging
+        //debug
         private void buttonDebug_Click(object sender, EventArgs e)
         {
-            sourcePath = "C:\\Users\\Larcho\\Documents\\osu!\\Songs";
-            targetPath = "C:\\Users\\Larcho\\Desktop\\Test";
+            //create a button named "buttonDebug"
+            //replace sourcePath and targetPath with your own path [dont delete the @ or the "]
+
+            sourcePath = @"C:\Users\Larcho\Documents\osu!\Songs";
+            targetPath = @"C:\Users\Larcho\Desktop\Mp3Output";
             songClassConstructor();
+
+            /*sourcePath = @"C:\...\osu!\Songs";
+            targetPath = @"C:\...\Mp3output";
+            songClassConstructor();*/
+        }
+
+        private void Browse1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
